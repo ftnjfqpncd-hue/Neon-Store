@@ -56,7 +56,7 @@
             line-height: 1;
         }
         .logo-text span:last-child {
-            color: var(--accent-secondary);
+            color: var(--accent-pink);
         }
         .logo-icon {
             width: 40px;
@@ -180,37 +180,68 @@
             margin-bottom: 15px;
         }
 
-        /* Grid for platforms */
         .platforms-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 15px;
         }
         .platform-btn {
-            background: var(--card-bg-light);
+            background: #15181f; 
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 15px 10px;
-            text-align: center;
+            border-radius: 16px;
+            padding: 15px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 8px;
+            justify-content: space-between;
+            min-height: 110px;
         }
-        .platform-btn:hover, .platform-btn.active {
-            border-color: var(--accent-primary);
-            background: rgba(0, 229, 255, 0.1);
+        .platform-btn:hover {
+            background: #1a1d24;
         }
+        .platform-btn.active {
+            background: #15181f;
+            border: 1.5px solid var(--accent-primary);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
+        }
+        
+        .platform-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+        }
+        
+        .service-badge {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+        
         .platform-icon {
-            font-size: 24px;
+            width: 32px;
+            height: 32px;
+            margin-right: auto;
         }
+        
+        .platform-info {
+            text-align: right;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
         .platform-name {
-            font-size: 13px;
-            font-weight: bold;
+            font-size: 15px;
+            font-weight: 700;
             color: #fff;
+            margin-bottom: 2px;
         }
+        
         .platform-count {
             font-size: 11px;
             color: var(--text-muted);
@@ -386,18 +417,22 @@
             position: fixed;
             bottom: 20px;
             left: 20px;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             background-color: #25D366;
             color: white;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 24px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
             cursor: pointer;
             z-index: 1000;
+        }
+        .whatsapp-float svg {
+            width: 30px;
+            height: 30px;
+            fill: #fff;
         }
         
         .info-bar {
@@ -425,7 +460,7 @@
     <div class="top-badges">
         <div>
             <span>0</span>
-            <span class="badge-cart">🛒</span>
+            <span class="badge-cart"><svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2" fill="none"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></span>
             <span>0 ج.م (EGP)</span>
         </div>
         <div>
@@ -441,9 +476,6 @@
     </div>
 
     <header>
-        <p style="color: var(--accent-primary); font-size: 12px; margin-bottom: 10px; background: rgba(0, 229, 255, 0.1); padding: 5px 10px; border-radius: 20px; border: 1px solid rgba(0, 229, 255, 0.3); display: inline-block;">
-            جميع خدمات السوشيال ميديا متاحة بالكامل (تيك توك ، انستقرام ، يوتيوب ، تويتر ، فيس بوك ، تيليجرام والمزيد)
-        </p>
         <h1 class="main-title">
             عزّز حضورك الرقمي <span>بأقوى</span><br>
             خدمات السوشيال ميديا<br>
@@ -470,36 +502,127 @@
                 <div class="section-desc">اختر التطبيق المطلوب لعرض جميع الأقسام والفئات الخاصة به</div>
             </div>
         </div>
+        
         <div class="platforms-grid">
-            <div class="platform-btn active" onclick="selectPlatform(this, 'all')">
-                <div class="platform-icon">🌐</div>
-                <div class="platform-name">جميع المنصات</div>
-                <div class="platform-count">72 فئة فرعية</div>
+            <div class="platform-btn" onclick="selectPlatform(this, 'all')">
+                <div class="platform-header">
+                    <span class="service-badge" id="badge-all">1578 خدمة</span>
+                    <svg class="platform-icon" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </div>
+                <div class="platform-info">
+                    <div class="platform-name">جميع المنصات</div>
+                    <div class="platform-count" id="count-all">72 فئة فرعية</div>
+                </div>
             </div>
-            <div class="platform-btn" onclick="selectPlatform(this, 'تيك توك')">
-                <div class="platform-icon">🎵</div>
-                <div class="platform-name">تيك توك</div>
-                <div class="platform-count">متاحة</div>
+            
+            <div class="platform-btn active" onclick="selectPlatform(this, 'تيك توك')">
+                <div class="platform-header">
+                    <span class="service-badge" id="badge-تيك توك">0 خدمة</span>
+                    <svg class="platform-icon" viewBox="0 0 24 24" fill="#ff0050" xmlns="http://www.w3.org/2000/svg"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.97-1.539 4.994 4.994 0 0 1-1.134-3.536h-3.414v13.197a3.522 3.522 0 1 1-5.915-2.585 3.518 3.518 0 0 1 2.4-1.045V7.747a7.02 7.02 0 1 0 7.02 7.02V8.406a8.435 8.435 0 0 0 4.912 1.583v-3.303Z"/></svg>
+                </div>
+                <div class="platform-info">
+                    <div class="platform-name">تيك توك</div>
+                    <div class="platform-count" id="count-تيك توك">0 فئة فرعية</div>
+                </div>
             </div>
+            
             <div class="platform-btn" onclick="selectPlatform(this, 'انستقرام')">
-                <div class="platform-icon">📸</div>
-                <div class="platform-name">انستقرام وثريذر</div>
-                <div class="platform-count">متاحة</div>
+                <div class="platform-header">
+                    <span class="service-badge" id="badge-انستقرام">0 خدمة</span>
+                    <svg class="platform-icon" viewBox="0 0 24 24" fill="url(#ig-grad)" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ig-grad" x1="2" y1="22" x2="22" y2="2"><stop offset="0%" stop-color="#feda75"/><stop offset="25%" stop-color="#fa7e1e"/><stop offset="50%" stop-color="#d62976"/><stop offset="75%" stop-color="#962fbf"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6zm9.65 1.5a1.25 1.25 0 0 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+                </div>
+                <div class="platform-info">
+                    <div class="platform-name">انستقرام وثريذر</div>
+                    <div class="platform-count" id="count-انستقرام">0 فئة فرعية</div>
+                </div>
             </div>
+            
             <div class="platform-btn" onclick="selectPlatform(this, 'تويتر')">
-                <div class="platform-icon">🐦</div>
-                <div class="platform-name">تويتر (X)</div>
-                <div class="platform-count">متاحة</div>
+                <div class="platform-header">
+                    <span class="service-badge" id="badge-تويتر">0 خدمة</span>
+                    <svg class="platform-icon" viewBox="0 0 24 24" fill="#1da1f2" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </div>
+                <div class="platform-info">
+                    <div class="platform-name">تويتر (X)</div>
+                    <div class="platform-count" id="count-تويتر">0 فئة فرعية</div>
+                </div>
             </div>
+            
             <div class="platform-btn" onclick="selectPlatform(this, 'يوتيوب')">
-                <div class="platform-icon">▶️</div>
-                <div class="platform-name">يوتيوب</div>
-                <div class="platform-count">متاحة</div>
+                <div class="platform-header">
+                    <span class="service-badge" id="badge-يوتيوب">0 خدمة</span>
+                    <svg class="platform-icon" viewBox="0 0 24 24" fill="#ff0000" xmlns="http://www.w3.org/2000/svg"><path d="M21.58 6.54c-.22-.86-.91-1.54-1.78-1.76C18.24 4.3 12 4.3 12 4.3s-6.24 0-7.8.48c-.87.22-1.56.9-1.78 1.76C2 8.1 2 12 2 12s0 3.9.42 5.46c.22.86.91 1.54 1.78 1.76 1.56.48 7.8.48 7.8.48s6.24 0 7.8-.48c.87-.22 1.56-.9 1.78-1.76.42-1.56.42-5.46.42-5.46s0-3.9-.42-5.46zM9.8 15.1V8.9l6.1 3.1-6.1 3.1z"/></svg>
+                </div>
+                <div class="platform-info">
+                    <div class="platform-name">يوتيوب</div>
+                    <div class="platform-count" id="count-يوتيوب">0 فئة فرعية</div>
+                </div>
             </div>
+            
             <div class="platform-btn" onclick="selectPlatform(this, 'فيس بوك')">
-                <div class="platform-icon">👍</div>
-                <div class="platform-name">فيس بوك</div>
-                <div class="platform-count">متاحة</div>
+                <div class="platform-header">
+                    <span class="service-badge" id="badge-فيس بوك">0 خدمة</span>
+                    <svg class="platform-icon" viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.04c-5.5 0-10 4.48-10 10.02 0 5.01 3.66 9.17 8.44 9.9v-7h-2.54V12.06h2.54V9.82c0-2.51 1.5-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.9h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.54-4.5-10.02-10-10.02z"/></svg>
+                </div>
+                <div class="platform-info">
+                    <div class="platform-name">فيس بوك</div>
+                    <div class="platform-count" id="count-فيس بوك">0 فئة فرعية</div>
+                </div>
+            </div>
+            
+            <div class="platform-btn" onclick="selectPlatform(this, 'واتساب')">
+                <div class="platform-header">
+                    <span class="service-badge" id="badge-واتساب">0 خدمة</span>
+                    <svg class="platform-icon" viewBox="0 0 24 24" fill="#25d366" xmlns="http://www.w3.org/2000/svg"><path d="M17.47 16.22c-.22.61-1.31 1.16-1.84 1.25-.52.09-1.2.22-3.41-.69-2.67-1.1-4.38-3.84-4.51-4.02-.13-.18-1.08-1.44-1.08-2.75 0-1.3.67-1.94.92-2.21.24-.27.53-.33.71-.33.18 0 .36 0 .52.01.17.01.39-.06.6.45.23.55.76 1.84.82 1.96.07.13.11.27.03.45-.09.18-.13.29-.26.44-.13.16-.27.35-.38.48-.13.14-.26.29-.11.55.15.26.66 1.09 1.41 1.76.96.86 1.76 1.12 2.02 1.25.26.13.41.11.56-.06.15-.17.65-.75.82-1.01.17-.26.35-.22.58-.13.24.09 1.49.71 1.75.83.26.13.43.2.49.31.06.11.06.66-.16 1.27z"/><path d="M12 2a10 10 0 0 0-8.62 15.06L2 22l5.06-1.35A10 10 0 1 0 12 2zm0 18.33a8.3 8.3 0 0 1-4.24-1.16l-.3-.18-3.15.83.84-3.07-.2-.32A8.32 8.32 0 1 1 12 20.33z"/></svg>
+                </div>
+                <div class="platform-info">
+                    <div class="platform-name">واتس اب</div>
+                    <div class="platform-count" id="count-واتساب">0 فئة فرعية</div>
+                </div>
+            </div>
+            
+            <div class="platform-btn" onclick="selectPlatform(this, 'تيليجرام')">
+                <div class="platform-header">
+                    <span class="service-badge" id="badge-تيليجرام">0 خدمة</span>
+                    <svg class="platform-icon" viewBox="0 0 24 24" fill="#0088cc" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.97-.64-.34-1 .22-1.58.15-.15 2.7-2.48 2.75-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.46.93-4.13 2.73-.39.27-.74.4-1.06.4-.35-.01-1.02-.2-1.52-.36-.61-.2-1.09-.31-1.05-.66.02-.18.27-.37.74-.57 2.91-1.27 4.86-2.11 5.84-2.52 2.77-1.15 3.35-1.35 3.73-1.36.08 0 .27.02.39.12.1.08.13.2.14.28-.01.07.01.2 0 .24z"/></svg>
+                </div>
+                <div class="platform-info">
+                    <div class="platform-name">تيليجرام</div>
+                    <div class="platform-count" id="count-تيليجرام">0 فئة فرعية</div>
+                </div>
+            </div>
+            
+            <div class="platform-btn" onclick="selectPlatform(this, 'زيارات')">
+                <div class="platform-header">
+                    <span class="service-badge" id="badge-زيارات">0 خدمة</span>
+                    <svg class="platform-icon" viewBox="0 0 24 24" fill="none" stroke="#8e44ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line><polyline points="10 7 7 10 10 13"></polyline><polyline points="14 7 17 10 14 13"></polyline></svg>
+                </div>
+                <div class="platform-info">
+                    <div class="platform-name">مواقع وتطبيقات</div>
+                    <div class="platform-count" id="count-زيارات">0 فئة فرعية</div>
+                </div>
+            </div>
+            
+            <div class="platform-btn" onclick="selectPlatform(this, 'سبوتيفاي')">
+                <div class="platform-header">
+                    <span class="service-badge" id="badge-سبوتيفاي">0 خدمة</span>
+                    <svg class="platform-icon" viewBox="0 0 24 24" fill="#1db954" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A10 10 0 1 0 22 12 10 10 0 0 0 12 2zm4.6 14.4a.63.63 0 0 1-.87.2c-2.38-1.45-5.38-1.78-8.91-.98a.63.63 0 1 1-.29-1.23c3.85-.9 7.15-.51 9.87 1.14a.63.63 0 0 1 .2.87zm1.18-2.63a.8.8 0 0 1-1.1.26c-2.73-1.68-6.9-2.18-9.88-1.2a.8.8 0 0 1-.46-1.53c3.42-1.09 8.04-.54 11.18 1.38a.8.8 0 0 1 .26 1.09zm.12-2.77c-3.26-1.94-8.62-2.12-11.72-1.18a.95.95 0 0 1-.56-1.82c3.55-1.07 9.47-.86 13.25 1.38a.95.95 0 0 1-.97 1.62z"/></svg>
+                </div>
+                <div class="platform-info">
+                    <div class="platform-name">سبوتيفاي وصوتيات</div>
+                    <div class="platform-count" id="count-سبوتيفاي">0 فئة فرعية</div>
+                </div>
+            </div>
+            
+            <div class="platform-btn" onclick="selectPlatform(this, 'عروض')">
+                <div class="platform-header">
+                    <span class="service-badge" id="badge-عروض">0 خدمة</span>
+                    <svg class="platform-icon" viewBox="0 0 24 24" fill="#f1c40f" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 19h19v2h-19zm19-14l-4.5 4-3-6-3 6-4.5-4 2 12h11z"/></svg>
+                </div>
+                <div class="platform-info">
+                    <div class="platform-name">عروض حصرية</div>
+                    <div class="platform-count" id="count-عروض">0 فئة فرعية</div>
+                </div>
             </div>
         </div>
     </div>
@@ -625,27 +748,49 @@
 </div>
 
 <div class="whatsapp-float" onclick="window.open('https://wa.me/201010876605', '_blank')">
-    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+    <svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M17.47 16.22c-.22.61-1.31 1.16-1.84 1.25-.52.09-1.2.22-3.41-.69-2.67-1.1-4.38-3.84-4.51-4.02-.13-.18-1.08-1.44-1.08-2.75 0-1.3.67-1.94.92-2.21.24-.27.53-.33.71-.33.18 0 .36 0 .52.01.17.01.39-.06.6.45.23.55.76 1.84.82 1.96.07.13.11.27.03.45-.09.18-.13.29-.26.44-.13.16-.27.35-.38.48-.13.14-.26.29-.11.55.15.26.66 1.09 1.41 1.76.96.86 1.76 1.12 2.02 1.25.26.13.41.11.56-.06.15-.17.65-.75.82-1.01.17-.26.35-.22.58-.13.24.09 1.49.71 1.75.83.26.13.43.2.49.31.06.11.06.66-.16 1.27z"/><path d="M12 2a10 10 0 0 0-8.62 15.06L2 22l5.06-1.35A10 10 0 1 0 12 2zm0 18.33a8.3 8.3 0 0 1-4.24-1.16l-.3-.18-3.15.83.84-3.07-.2-.32A8.32 8.32 0 1 1 12 20.33z"/></svg>
 </div>
 
 <script>
-    // هذه عينة تجريبية من الخدمات لكي يعمل الكود (الملف الأصلي يحتوي على 1,578 خدمة)
-    const allServices = [
-        {"id": 2237, "cat": "تيك توك [ تكبيس جولات - سكور ] [ بث مباشر ] [ فوري ]", "name": "تيك توك [ تكبيس جولات - سكور ] [ تنفيذ فوري ]", "price": 0.2156, "min": 100, "max": 3000, "refill": "لا"},
-        {"id": 3042, "cat": "تيك توك [ لايكات ]", "name": "تيك توك لايكات [ 1 مليون ] [ ضمان 30 يوم ] [ البدء: 0-1 ساعة / السرعة: 50 الف يومي ]♻️", "price": 0.703, "min": 10, "max": 20000, "refill": "نعم"},
-        {"id": 2360, "cat": "انستقرام [ مشاهدات ]", "name": "انستقرام مشاهدات [ جميع الروابط ] [ 1 مليون ] [ البدء: 0-1 ساعة/ السرعة: 100 الف يومي ]", "price": 0.0043, "min": 100, "max": 217545811, "refill": "لا"},
-        {"id": 3097, "cat": "انستقرام [ لايكات ]", "name": "انستقرام لايكات [ ضمان 30 يوم ] [ 500 الف ] [ البدء: 0-1 ساعة/ السرعة:10 الف يومي ] ⛔♻️", "price": 0.5624, "min": 10, "max": 500000, "refill": "لا"},
-        {"id": 2209, "cat": "تويتر [ متابعين ]", "name": "تويتر متابعين [ 100 الف ] [ ضمان 30 يوم ]", "price": 6.5, "min": 10, "max": 30000, "refill": "لا"},
-        {"id": 1829, "cat": "يوتيوب [ مشاهدات ]", "name": "يوتيوب مشاهدات [ ضمان دائم ] [ سريع جدا ]", "price": 2.8909, "min": 100, "max": 1000000, "refill": "لا"},
-        {"id": 1276, "cat": "فيس بوك [ معجبين للصفحات ]", "name": "فيس بوك معجبين للصفحات [ R30 ] [ 2K/ يومي ]", "price": 3.2647, "min": 100, "max": 100000, "refill": "لا"}
-    ];
+    // عينة من الخدمات (يمكنك استخدام الملف الكامل المرفق في الأعلى للوصول لكافة 1,578 خدمة)
+    const allServices = [{"id": 2237, "cat": "تيك توك [ تكبيس جولات - سكور ] [ بث مباشر ] [ فوري ]", "name": "تيك توك [ تكبيس جولات - سكور ] [ تنفيذ فوري ]", "price": 0.2156, "min": 100, "max": 3000, "refill": "لا"}, {"id": 2238, "cat": "تيك توك [ تكبيس جولات - سكور ] [ بث مباشر ] [ فوري ]", "name": "تيك توك [ لايكات بث مباشر - تكبيس ] [ تنفيذ فوري ]", "price": 0.0384, "min": 100, "max": 100000000, "refill": "لا"}, {"id": 3007, "cat": "واتساب [ مشتركين للقنوات ]", "name": "واتساب مشتركين [ للقنوات ] [ 10 الف ] [ بدون ضمان ]", "price": 8.2875, "min": 10, "max": 10000, "refill": "لا"}, {"id": 3008, "cat": "واتساب [ مشتركين للقنوات ]", "name": "واتساب مشتركين [ للقنوات ] [ 10 الف ] [ عربي ] [ بدون ضمان ]", "price": 8.702, "min": 10, "max": 5000, "refill": "لا"}, {"id": 1074, "cat": "تيك توك [ مشاهدات ]", "name": "تيك توك مشاهدات [ سريع ]", "price": 0.0578, "min": 100, "max": 10000000, "refill": "لا"}, {"id": 2209, "cat": "تويتر [ متابعين ]", "name": "تويتر متابعين [ 100 الف ] [ ضمان 30 يوم ]", "price": 6.5, "min": 10, "max": 30000, "refill": "لا"}, {"id": 1829, "cat": "يوتيوب [ مشاهدات ]", "name": "يوتيوب مشاهدات [ ضمان دائم ] [ سريع جدا ]", "price": 2.8909, "min": 100, "max": 1000000, "refill": "لا"}, {"id": 1276, "cat": "فيس بوك [ معجبين للصفحات ]", "name": "فيس بوك معجبين للصفحات [ R30 ] [ 2K/ يومي ]", "price": 3.2647, "min": 100, "max": 100000, "refill": "لا"}];
     
     let currentService = null;
-    let selectedPlatform = 'all';
-    let selectedPayment = 'فودافون كاش';
-    const USD_TO_EGP = 50; // سعر الصرف التجريبي (يمكنك تغييره متى شئت)
+    let selectedPlatform = 'تيك توك';
+    const USD_TO_EGP = 50;
+
+    function calculatePlatformStats() {
+        const platforms = ['تيك توك', 'انستقرام', 'تويتر', 'يوتيوب', 'فيس بوك', 'واتساب', 'تيليجرام', 'زيارات', 'سبوتيفاي', 'عروض'];
+        
+        document.getElementById('badge-all').textContent = allServices.length + ' خدمة';
+        const allCats = [...new Set(allServices.map(s => s.cat))];
+        document.getElementById('count-all').textContent = allCats.length + ' فئة فرعية';
+        
+        platforms.forEach(platform => {
+            let pServices = [];
+            if (platform === 'زيارات') {
+                pServices = allServices.filter(s => s.cat.includes('زيارات') || s.cat.includes('تطبيقات'));
+            } else if (platform === 'عروض') {
+                pServices = allServices.filter(s => s.cat.includes('عروض') || s.cat.includes('مميزة') || s.cat.includes('ينصح بها'));
+            } else if (platform === 'سبوتيفاي') {
+                pServices = allServices.filter(s => s.cat.includes('سبوتيفاي') || s.cat.includes('ساوند'));
+            } else {
+                pServices = allServices.filter(s => s.cat.includes(platform));
+            }
+            
+            const badge = document.getElementById('badge-' + platform);
+            const count = document.getElementById('count-' + platform);
+            
+            if (badge && count) {
+                badge.textContent = pServices.length + ' خدمة';
+                const pCats = [...new Set(pServices.map(s => s.cat))];
+                count.textContent = pCats.length + ' فئة فرعية';
+            }
+        });
+    }
 
     function initApp() {
+        calculatePlatformStats();
         updateCategories();
     }
 
@@ -656,6 +801,7 @@
         updateCategories();
     }
 
+    let selectedPayment = 'فودافون كاش';
     function selectPayment(element, method) {
         document.querySelectorAll('.payment-method').forEach(btn => btn.classList.remove('active'));
         element.classList.add('active');
@@ -673,7 +819,15 @@
         
         let filteredServices = allServices;
         if (selectedPlatform !== 'all') {
-            filteredServices = allServices.filter(s => s.cat.includes(selectedPlatform));
+            if (selectedPlatform === 'زيارات') {
+                filteredServices = allServices.filter(s => s.cat.includes('زيارات') || s.cat.includes('تطبيقات'));
+            } else if (selectedPlatform === 'عروض') {
+                filteredServices = allServices.filter(s => s.cat.includes('عروض') || s.cat.includes('مميزة') || s.cat.includes('ينصح بها'));
+            } else if (selectedPlatform === 'سبوتيفاي') {
+                filteredServices = allServices.filter(s => s.cat.includes('سبوتيفاي') || s.cat.includes('ساوند'));
+            } else {
+                filteredServices = allServices.filter(s => s.cat.includes(selectedPlatform));
+            }
         }
         
         const categories = [...new Set(filteredServices.map(s => s.cat))];
@@ -684,20 +838,36 @@
             catSelect.appendChild(opt);
         });
         
-        populateServices();
+        populateServices(filteredServices);
     }
 
-    function populateServices() {
+    function populateServices(baseServices = null) {
         const cat = document.getElementById('categorySelect').value;
         const search = document.getElementById('searchInput').value.trim().toLowerCase();
         const srvSelect = document.getElementById('serviceSelect');
         srvSelect.innerHTML = '<option value="">-- اختر الخدمة --</option>';
 
-        const filtered = allServices.filter(s => {
-            const matchPlatform = (selectedPlatform === 'all') || s.cat.includes(selectedPlatform);
+        let targetServices = baseServices;
+        if (!targetServices) {
+            if (selectedPlatform !== 'all') {
+                 if (selectedPlatform === 'زيارات') {
+                    targetServices = allServices.filter(s => s.cat.includes('زيارات') || s.cat.includes('تطبيقات'));
+                } else if (selectedPlatform === 'عروض') {
+                    targetServices = allServices.filter(s => s.cat.includes('عروض') || s.cat.includes('مميزة') || s.cat.includes('ينصح بها'));
+                } else if (selectedPlatform === 'سبوتيفاي') {
+                    targetServices = allServices.filter(s => s.cat.includes('سبوتيفاي') || s.cat.includes('ساوند'));
+                } else {
+                    targetServices = allServices.filter(s => s.cat.includes(selectedPlatform));
+                }
+            } else {
+                targetServices = allServices;
+            }
+        }
+
+        const filtered = targetServices.filter(s => {
             const matchCat = (cat === 'all') || (s.cat === cat);
             const matchSearch = !search || s.name.toLowerCase().includes(search) || s.cat.toLowerCase().includes(search) || String(s.id).includes(search);
-            return matchPlatform && matchCat && matchSearch;
+            return matchCat && matchSearch;
         });
 
         filtered.slice(0, 400).forEach(s => {
