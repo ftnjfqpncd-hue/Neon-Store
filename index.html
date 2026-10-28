@@ -453,7 +453,7 @@
 <div class="app-wrapper">
     <div class="info-bar">
         ⚡ تنفيذ فوري وآمن لجميع خدمات السوشيال ميديا<br>
-        📊 إجمالي الخدمات المتاحة: 1578 خدمة في 72 فئة<br>
+        📊 إجمالي الخدمات المتاحة: <span id="totalServicesCount">جاري التحميل...</span> خدمة<br>
         📞 دعم فني مباشر: 01010876605
     </div>
     
@@ -483,7 +483,7 @@
         </h1>
         <p class="sub-title">
             اختر المنصة العامة ثم حدد الفئة والخدمة المناسبة لك من بين<br>
-            <strong style="color: #fff;">1,578 خدمة احترافية</strong>. وأدخل بياناتك ليتم إرسال طلبك وتنفيذه<br>
+            <strong style="color: #fff;" id="dynamicHeaderCount">آلاف الخدمات الاحترافية</strong>. وأدخل بياناتك ليتم إرسال طلبك وتنفيذه<br>
             فوراً عبر الواتساب.
         </p>
 
@@ -506,12 +506,12 @@
         <div class="platforms-grid">
             <div class="platform-btn" onclick="selectPlatform(this, 'all')">
                 <div class="platform-header">
-                    <span class="service-badge" id="badge-all">1578 خدمة</span>
+                    <span class="service-badge" id="badge-all">0 خدمة</span>
                     <svg class="platform-icon" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                 </div>
                 <div class="platform-info">
                     <div class="platform-name">جميع المنصات</div>
-                    <div class="platform-count" id="count-all">72 فئة فرعية</div>
+                    <div class="platform-count" id="count-all">0 فئة فرعية</div>
                 </div>
             </div>
             
@@ -752,12 +752,44 @@
 </div>
 
 <script>
-    // عينة من الخدمات (يمكنك استخدام الملف الكامل المرفق في الأعلى للوصول لكافة 1,578 خدمة)
-    const allServices = [{"id": 2237, "cat": "تيك توك [ تكبيس جولات - سكور ] [ بث مباشر ] [ فوري ]", "name": "تيك توك [ تكبيس جولات - سكور ] [ تنفيذ فوري ]", "price": 0.2156, "min": 100, "max": 3000, "refill": "لا"}, {"id": 2238, "cat": "تيك توك [ تكبيس جولات - سكور ] [ بث مباشر ] [ فوري ]", "name": "تيك توك [ لايكات بث مباشر - تكبيس ] [ تنفيذ فوري ]", "price": 0.0384, "min": 100, "max": 100000000, "refill": "لا"}, {"id": 3007, "cat": "واتساب [ مشتركين للقنوات ]", "name": "واتساب مشتركين [ للقنوات ] [ 10 الف ] [ بدون ضمان ]", "price": 8.2875, "min": 10, "max": 10000, "refill": "لا"}, {"id": 3008, "cat": "واتساب [ مشتركين للقنوات ]", "name": "واتساب مشتركين [ للقنوات ] [ 10 الف ] [ عربي ] [ بدون ضمان ]", "price": 8.702, "min": 10, "max": 5000, "refill": "لا"}, {"id": 1074, "cat": "تيك توك [ مشاهدات ]", "name": "تيك توك مشاهدات [ سريع ]", "price": 0.0578, "min": 100, "max": 10000000, "refill": "لا"}, {"id": 2209, "cat": "تويتر [ متابعين ]", "name": "تويتر متابعين [ 100 الف ] [ ضمان 30 يوم ]", "price": 6.5, "min": 10, "max": 30000, "refill": "لا"}, {"id": 1829, "cat": "يوتيوب [ مشاهدات ]", "name": "يوتيوب مشاهدات [ ضمان دائم ] [ سريع جدا ]", "price": 2.8909, "min": 100, "max": 1000000, "refill": "لا"}, {"id": 1276, "cat": "فيس بوك [ معجبين للصفحات ]", "name": "فيس بوك معجبين للصفحات [ R30 ] [ 2K/ يومي ]", "price": 3.2647, "min": 100, "max": 100000, "refill": "لا"}];
-    
+    let allServices = [];
     let currentService = null;
     let selectedPlatform = 'تيك توك';
     const USD_TO_EGP = 50;
+
+    function initApp() {
+        // Fetch services from JSON file instead of hardcoded array
+        fetch('services_data.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Map the JSON structure to what the script expects
+                allServices = data.map(item => ({
+                    id: item['رقم الخدمة (ID)'],
+                    cat: item['الفئة (Category)'],
+                    name: item['اسم الخدمة (Service Name)'],
+                    price: parseFloat(item['السعر لكل 1000 ($)']),
+                    min: parseInt(item['الحد الأدنى (Min)']),
+                    max: parseInt(item['الحد الأعلى (Max)']),
+                    refill: item['الضمان/التعويض (Refill)']
+                }));
+                
+                document.getElementById('totalServicesCount').textContent = allServices.length;
+                document.getElementById('dynamicHeaderCount').textContent = allServices.length + ' خدمة احترافية';
+                
+                calculatePlatformStats();
+                updateCategories();
+            })
+            .catch(error => {
+                console.error('Error loading services:', error);
+                document.getElementById('totalServicesCount').textContent = 'خطأ في التحميل';
+                alert('عذراً، حدث خطأ أثناء تحميل الخدمات. تأكد من وجود ملف services_data.json في نفس المجلد.');
+            });
+    }
 
     function calculatePlatformStats() {
         const platforms = ['تيك توك', 'انستقرام', 'تويتر', 'يوتيوب', 'فيس بوك', 'واتساب', 'تيليجرام', 'زيارات', 'سبوتيفاي', 'عروض'];
@@ -789,11 +821,6 @@
         });
     }
 
-    function initApp() {
-        calculatePlatformStats();
-        updateCategories();
-    }
-
     function selectPlatform(element, platform) {
         document.querySelectorAll('.platform-btn').forEach(btn => btn.classList.remove('active'));
         element.classList.add('active');
@@ -814,6 +841,8 @@
     }
     
     function updateCategories() {
+        if(allServices.length === 0) return;
+        
         const catSelect = document.getElementById('categorySelect');
         catSelect.innerHTML = '<option value="all">🌟 جميع فئات وخدمات هذا القسم</option>';
         
@@ -842,6 +871,8 @@
     }
 
     function populateServices(baseServices = null) {
+        if(allServices.length === 0) return;
+        
         const cat = document.getElementById('categorySelect').value;
         const search = document.getElementById('searchInput').value.trim().toLowerCase();
         const srvSelect = document.getElementById('serviceSelect');
