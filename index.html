@@ -758,16 +758,19 @@
     const USD_TO_EGP = 50;
 
     function initApp() {
-        // Fetch services from JSON file instead of hardcoded array
-        fetch('services_data.json')
+        // نستخدم رابط CDN العالمي لضمان سحب الملف مباشرة بدون مشاكل
+        const dataUrl = 'https://cdn.jsdelivr.net/gh/ftnjfqpncd-hue/Neon-Store@main/services_data.json';
+        
+        fetch(dataUrl)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    // تجربة الرابط الاحتياطي في حال فشل الأول
+                    return fetch('https://raw.githubusercontent.com/ftnjfqpncd-hue/Neon-Store/main/services_data.json');
                 }
-                return response.json();
+                return response;
             })
+            .then(response => response.json())
             .then(data => {
-                // Map the JSON structure to what the script expects
                 allServices = data.map(item => ({
                     id: item['رقم الخدمة (ID)'],
                     cat: item['الفئة (Category)'],
@@ -786,8 +789,8 @@
             })
             .catch(error => {
                 console.error('Error loading services:', error);
-                document.getElementById('totalServicesCount').textContent = 'خطأ في التحميل';
-                alert('عذراً، حدث خطأ أثناء تحميل الخدمات. تأكد من وجود ملف services_data.json في نفس المجلد.');
+                document.getElementById('totalServicesCount').textContent = 'يوجد خطأ';
+                alert('لم يتمكن الموقع من قراءة الخدمات. الرجاء التأكد من أن اسم الملف المرفوع على جيت هب هو "services_data.json" وليس "services_data.json.json"');
             });
     }
 
@@ -1027,5 +1030,6 @@
 
     window.onload = initApp;
 </script>
+
 </body>
 </html>
