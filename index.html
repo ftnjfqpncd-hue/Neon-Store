@@ -759,7 +759,7 @@
 
     function initApp() {
         // Fetch services from JSON file instead of hardcoded array
-        fetch('services_data.json')
+        fetch('https://raw.githubusercontent.com/ftnjfqpncd-hue/Neon-Store/main/services_data.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
